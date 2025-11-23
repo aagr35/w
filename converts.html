@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 7</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: linear-gradient(to right, #e8f5e9, #f9fff9);
+      color: #1b4332;
+    }
+
+    h2 {
+      color: #1b5e20;
+      border-left: 6px solid #43a047;
+      padding-left: 12px;
+      margin-top: 40px;
+    }
+
+    textarea,
+    input {
+      width: 98%;
+      padding: 10px;
+      margin: 10px 0 15px;
+      border: 1px solid #a5d6a7;
+      border-radius: 6px;
+      font-size: 15px;
+      background-color: #ffffff;
+    }
+
+    button {
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px 8px 10px 0;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+    }
+
+    .output {
+      background-color: #f1f8e9;
+      border: 1px solid #c5e1a5;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #c8e6c9;
+      border-radius: 5pt;
+      margin-top: 40px;
+      padding: 10px;
+      font-size: 14px;
+      color: #1b4332;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>(a) Convert JSON Text → JavaScript Object</h2>
+  <textarea id="jsonInput">{ "name": "Ravi", "age": 22, "city": "Mysuru" }</textarea>
+  <button onclick="convertJSON()">Convert</button>
+  <div class="output" id="jsonOutput"></div>
+
+  <h2>(b) Convert JSON Date String → JavaScript Date</h2>
+  <textarea id="dateInput">{ "event": "Conference", "date": "2025-11-10T09:30:00Z" }</textarea>
+  <button onclick="convertDate()">Convert Date</button>
+  <div class="output" id="dateOutput"></div>
+
+  <h2>(c) Convert JSON ↔ CSV</h2>
+  <textarea id="jsonCsvInput">[{"id":101,"name":"Ananya","dept":"CSE"},{"id":102,"name":"Rohit","dept":"ECE"}]</textarea>
+  <button onclick="jsonToCsv()">JSON → CSV</button>
+  <button onclick="csvToJson()">CSV → JSON</button>
+  <div class="output" id="csvOutput"></div>
+
+  <h2>(d) Hash a String (SHA-256)</h2>
+  <input type="text" id="hashInput" value="Hello World" />
+  <button onclick="hashString()">Generate Hash</button>
+  <div class="output" id="hashOutput"></div>
+
+  <script>
+    // (a) JSON → JavaScript Object
+    function convertJSON() {
+    try{
+      const input=document.getElementById("jsonInput");
+      document.getElementById("jsonOutput").innerText=JSON.stringify(JSON.parse(input.value), null, 2);
+    }catch{
+      document.getElementById("jsonOutput").innerText = "Invalid JSON format.";
+    }
+  }
+
+    // (b) JSON Date → JavaScript Date
+    function convertDate() {
+      try{
+        const input = document.getElementById("dateInput");
+        const{event,date}=JSON.parse(input.value);
+        const jdate=new Date(date);
+        document.getElementById("dateOutput").innerText = `Event:${event},\nDate:${jdate},\nLocale String Date:${jdate.toLocaleString()}`;
+      }catch{
+        document.getElementById("dateOutput").innerText = "Invalid JSON date format.";
+      }
+    }
+
+    // (c) JSON → CSV
+    function jsonToCsv() {
+      try {
+        const arr = JSON.parse(document.getElementById("jsonCsvInput").value);
+        const keys = Object.keys(arr[0]);
+        document.getElementById("csvOutput").innerText=[keys.join(","), ...arr.map(obj => keys.map(k => obj[k]).join(","))].join("\n");
+      } catch {
+        document.getElementById("csvOutput").innerText = "Invalid JSON";
+      }
+    }
+    // (c) CSV → JSON
+    function csvToJson() {
+      try {
+        const [h, ...rows] = document.getElementById("jsonCsvInput").value.split("\n");
+        const headers = h.split(",");
+        document.getElementById("csvOutput").innerText = JSON.stringify(rows.map(r => r.split(",").reduce((o, v, i) => (o[headers[i]] = v, o), {})),null,2);
+      } catch {
+        document.getElementById("csvOutput").innerText = "Invalid CSV";
+      }
+    }
+    // (d) Hash a string using SHA-256
+    async function hashString() {
+      let text = document.getElementById("hashInput").value;
+      if (!text) {
+        document.getElementById("hashOutput").innerText = "Enter text";
+        return;
+      }
+
+      let buff=await crypto.subtle.digest("sha-256",new TextEncoder().encode(text));
+      let hash=new Uint8Array(buff);
+      let hex="";
+      for(let b in hash){
+        hex+=b.toString(16).padStart(2,"0")
+      }
+
+      document.getElementById("hashOutput").innerText = hex;
+    }
+  </script>
+
+  <footer>
+    Program 7 — Name: Adithya Sy | USN: 1CR23CS014 | Batch: 5A1
+  </footer>
+
+</body>
+
+</html>

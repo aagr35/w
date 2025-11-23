@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visitors Count</title>
+</head>
+<body>
+
+<h1>Welcome to my page</h1>
+<hr>
+
+<footer>
+    <?php
+    $file="counter.txt";
+    if(!file_exists($file)){
+        file_put_contents($file,0);
+    }
+    $count=file_get_contents($file);
+    $count+=2;
+    file_put_contents($file,$count);
+    echo "<em> the 2 times visters are :$count</em>";
+    ?>
+</footer>
+
+</body>
+</html>

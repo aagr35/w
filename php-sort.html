@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sort Students</title>
+
+<?php
+$con = mysqli_connect("localhost","root","","student");
+
+// checking connection error
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+?>
+
+<style>
+    table{
+        border-collapse:collapse;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    tr,td{
+     border:1px solid black;  
+     width:150px;
+    height: 50px; 
+    text-align:center;
+    }
+    th{
+        border:1px solid black;
+        text-align:center;
+    }
+    h1,h2{
+        text-align:center;
+    }
+  </style>
+
+</head>
+<body>
+
+<h1>Student Records</h1>
+<h2>Before Sorting</h2>
+
+<?php
+$query = mysqli_query($con,"SELECT * FROM tblstudent");
+$students = mysqli_fetch_all($query, MYSQLI_ASSOC);
+?>
+
+<table align="center">
+<tr>
+    <th>Sl.No</th>
+    <th>USN</th>
+    <th>Name</th>
+    <th>Department</th>
+</tr>
+
+<?php
+for ($i=0; $i<sizeof($students); $i++) {
+    echo "<tr>";
+    echo "<td>".($i+1)."</td>";
+    echo "<td>".$students[$i]['USN']."</td>";
+    echo "<td>".$students[$i]['Name']."</td>";
+    echo "<td>".$students[$i]['department']."</td>";
+    echo "</tr>";
+}
+?>
+</table>
+
+<?php
+// Selection Sort by USN
+for ($i=0; $i<sizeof($students); $i++) {
+    $minUSN = $i;
+    for ($j=$i+1; $j<sizeof($students); $j++) {
+        if ($students[$j]["USN"] < $students[$minUSN]["USN"]) {
+            $minUSN = $j;
+        }
+    }
+    // swap
+    $temp = $students[$i];
+    $students[$i] = $students[$minUSN];
+    $students[$minUSN] = $temp;
+}
+?>
+
+<h2>After Sorting - Selection Sort</h2>
+
+<table align="center">
+<tr>
+    <th>Sl.No</th>
+    <th>USN</th>
+    <th>Name</th>
+    <th>Department</th>
+</tr>
+
+<?php
+for ($i=0; $i<sizeof($students); $i++) {
+    echo "<tr>";
+    echo "<td>".($i+1)."</td>";
+    echo "<td>".$students[$i]['USN']."</td>";
+    echo "<td>".$students[$i]['Name']."</td>";
+    echo "<td>".$students[$i]['department']."</td>";
+    echo "</tr>";
+}
+?>
+</table>
+
+<?php mysqli_close($con); ?>
+
+</body>
+</html>

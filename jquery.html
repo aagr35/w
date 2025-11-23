@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 9 – jQuery</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    #box {
+        width: 150px;
+        height: 150px;
+        background-color: red;
+        margin-top: 20px;
+        position: relative;
+        left: 0px;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #e7e7e7;
+    }
+</style>
+</head>
+<body>
+
+
+<h2>a. Append Content</h2>
+
+<p id="para">This is the original paragraph. </p>
+<ul id="list">
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+
+<button id="appendBtn">Append Content</button>
+
+<h2>b. Change Size Using animate()</h2>
+
+<p id="text">Animate Me!</p>
+<button id="inc">Increase Size</button>
+<button id="dec">Decrease Size</button>
+
+<h2>c. Change Color of Animated DIV</h2>
+
+<input type="color" id="colorPicker" value="#000000">
+<button id="animateBox">Animate Box</button>
+
+<div id="box"></div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Color Animation Plugin (from requirement link) -->
+<script src="https://bitstorm.org/jquery/color-animation/jquery.animate-colors-min.js"></script>
+
+<script>
+
+    // a) Append content
+    $("#appendBtn").click(function () {
+        //$("#para").append(" This text was appended.");
+        $("#list").append("<li>New List Item</li>");
+    });
+
+    // b) Animate text size
+    $("#inc").click(function () {
+        $("#text").animate({ fontSize: "+=10px" }, 500);
+    });
+
+    $("#dec").click(function(){
+        $("#text").animate({fontSize:"-=20px"},500);
+    })
+
+    // c) Animate box: move right + change color + grow, then return to normal
+    $("#animateBox").click(function () {
+        let newColor = $("#colorPicker").val();
+
+        $("#box").animate({left:'200px',width:'200px',height:"200px",backgroundColor:newColor},1000).animate({left:'0px',width:"150px",height:"150px",backgroundColor:"red"},1000);
+    });
+
+</script>
+
+</body>
+</html>

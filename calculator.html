@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10%;
+            background-color: rgb(171, 156, 156);
+        }
+        input[type="text"]{
+            width: 245px;
+            height: 40px;
+            border-radius: 10px;
+            text-align: right;
+
+        }
+        input[type="button"],
+        input[type="reset"]{
+            height: 50px;
+            width: 50px;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: lightgray;
+            font-size: 18px;
+        }
+
+        input[type="button"]:hover,
+        input[type="reset"]:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        form {
+           background-color: rgb(27, 184, 187);
+           padding: 10px;
+           border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <form id="calculator">
+            <div class="clrow">
+                <input type="text" name="ans" id="ans" value="">
+            </div>
+            <div class="clrow">
+                <input type="button" value="0" onclick="ans.value+='0'"> 
+                <input type="button" value="1" onclick="ans.value+='1'">
+                <input type="button" value="2" onclick="ans.value+='2'">
+                <input type="button" value="3" onclick="ans.value+='3'">
+            </div>
+            <div class="clrow">
+                <input type="button" value="4" onclick="ans.value+='4'">
+                <input type="button" value="5" onclick="ans.value+='5'">
+                <input type="button" value="6" onclick="ans.value+='6'">
+                <input type="button" value="7" onclick="ans.value+='7'">
+            </div>
+            <div class="clrow">
+                <input type="button" value="8" onclick="ans.value+='8'">
+                <input type="button" value="9" onclick="ans.value+='9'">
+                <input type="button" value="*" onclick="ans.value+='*'"> 
+                <input type="button" value="+" onclick="ans.value+='+'">
+            </div>
+            <div class="clrow">
+                <input type="button" value="-" onclick="ans.value+='-'"> 
+                <input type="button" value="/" onclick="ans.value+='/'">
+                <input type="button" value="^2" onclick="ans.value +='**2'">
+                <input type="button" value="sqrt" onclick="ans.value = Math.sqrt(ans.value)">
+            </div>
+            <div class="clrow">
+                <input type="reset" value="C">
+                <input type="button" value="%" onclick="ans.value+='%'">
+                <input type="button" value="." onclick="ans.value+='.'">
+                <input type="button" value="=" onclick="ans.value=eval(ans.value)">
+            </div>
+            <footer>
+                <p>Adithya SY | 1CR23CS015 | A1 Batch</p>
+            </footer>
+        </form>
+    </div>
+</body>
+</html>

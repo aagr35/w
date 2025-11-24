@@ -1,0 +1,198 @@
+<!-- Minimal HTML + JS – Convert string to JSON and display attributes
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>JSON Output:</h3>
+<p id="title"></p>
+<p id="author"></p>
+<p id="published"></p>
+
+<script>
+    // given string (replace curly quotes with normal quotes)
+    var txt = '{"book":{"title":"Great Expectations","author":"Charles Dickens","published":"1861-08-03"}}';
+
+    // convert string to JSON object
+    var obj = JSON.parse(txt);
+
+    // display attributes
+    document.getElementById("title").innerHTML = "Title: " + obj.book.title;
+    document.getElementById("author").innerHTML = "Author: " + obj.book.author;
+    document.getElementById("published").innerHTML = "Published: " + obj.book.published;
+</script>
+
+</body>
+</html> -->
+
+
+<!-- PHP Program: Page Refresh Counter -->
+ <!-- <?php
+// Filename : counter.php
+
+$file = "counter.txt";
+
+// If file does not exist, create it with 0
+if(!file_exists($file)){
+    file_put_contents($file, "0");
+}
+
+// Read current count
+$count = (int)file_get_contents($file);
+
+// Increase count
+$count++;
+
+// Save updated count back to file
+file_put_contents($file, $count);
+
+// Display count
+echo "Page Refresh Count : " . $count;
+?> -->
+
+
+
+<!-- ✅ jQuery Program to Animate Background-Color and Font-Size -->
+ <!-- <!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#btn").click(function(){
+                $("#box").animate({
+                    "font-size": "30px",
+                    "backgroundColor": "#ffcc00"
+                }, 1000);
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+<button id="btn">Animate</button>
+
+<div id="box" style="width:200px; height:100px; background:#87cefa; padding:20px;">
+    Hello World
+</div>
+
+</body>
+</html> -->
+
+
+<!-- {
+    "title": "Tech Fest 2025",
+    "date": "2025-12-10",
+    "club": "Computer Science Club",
+    "venue": "Auditorium Hall"
+} -->
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.getJSON("event.json", function(data) {
+                $("#display").html(
+                    "Title: " + data.title + "<br>" +
+                    "Date: " + data.date + "<br>" +
+                    "Club: " + data.club + "<br>" +
+                    "Venue: " + data.venue
+                );
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+<h3>Event Details</h3>
+<div id="display" style="border:1px solid #000; padding:10px; width:250px;">
+    <!-- Event details will appear here -->
+<!-- </div>
+
+</body>
+</html>
+
+ --> -->
+
+
+
+<!-- 
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $.getJSON("event.json", function(data) {
+
+                // Convert JSON date string to JavaScript Date object
+                var eventDate = new Date(data.date);
+
+                // Array of month names
+                var months = [
+                    "January","February","March","April","May","June",
+                    "July","August","September","October","November","December"
+                ];
+
+                // Format: 12 January 2025
+                var day = eventDate.getDate();
+                var month = months[eventDate.getMonth()];
+                var year = eventDate.getFullYear();
+
+                var formatted = day + " " + month + " " + year;
+
+                // Display formatted date
+                $("#show").html("Event Date: " + formatted);
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+
+<h3>Formatted Event Date</h3>
+<div id="show" style="padding:10px; border:1px solid #000; width:250px;">
+</div>
+
+</body>
+</html> -->
+<!-- 
+
+
+<?php
+// connect to database
+$conn = mysqli_connect("localhost", "root", "", "eventdb");
+
+// check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// retrieve records
+$sql = "SELECT * FROM events";
+$result = mysqli_query($conn, $sql);
+
+// display records
+echo "<h3>Event Records</h3>";
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "ID: " . $row['id'] . "<br>";
+    echo "Title: " . $row['title'] . "<br>";
+    echo "Club: " . $row['club'] . "<br>";
+    echo "Date: " . $row['date'] . "<br>";
+    echo "<hr>";
+}
+
+mysqli_close($conn);
+?> -->
